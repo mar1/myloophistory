@@ -1,0 +1,26 @@
+#logo {
+    width: 200px;
+    padding: 1.1rem 0;
+    text-align: center;
+    margin: auto;
+  }
+
+  ion-title {
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #15B7B9;
+  }
+
+  ion-card {
+    text-align: center;
+  }
+
+  ion-card-title {
+    --color: #15B7B9 !important;
+    font-size: 15pt !important;
+}
+
+    ion-card-subtitle {
+        --color: white !important;
+        font-size: 12pt !important;
+    }
