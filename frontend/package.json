@@ -23,6 +23,7 @@
     "core-js": "^3.6.5",
     "ethers": "^5.7.2",
     "ionicons": "^6.0.3",
+    "nft.storage": "^7.0.0",
     "video.js": "^7.20.3",
     "videojs-record": "^4.5.0",
     "vue": "^3.2.21",

@@ -3,11 +3,12 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract MLS is ERC721, ERC721URIStorage, Ownable {
+contract MLS is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -66,7 +67,7 @@ contract MLS is ERC721, ERC721URIStorage, Ownable {
         _burn(tokenId);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256) pure override internal {
+    function _beforeTokenTransfer(address from, address to, uint256) pure override(ERC721, ERC721Enumerable) internal {
         require(from == address(0) || to == address(0), "Loopster are non-transferable");
     }
 
@@ -124,4 +125,19 @@ contract MLS is ERC721, ERC721URIStorage, Ownable {
       }
       str = string(cstr);
     }
+
+    function walletOfOwner(address _owner) public view returns (uint256[] memory)
+    {
+    uint256 ownerTokenCount = balanceOf(_owner);
+    uint256[] memory tokenIds = new uint256[](ownerTokenCount);
+    for (uint256 i; i < ownerTokenCount; i++) {
+      tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
+    }
+    return tokenIds;
+  }
+
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool)
+  {
+    return super.supportsInterface(interfaceId);
+  }
 }
