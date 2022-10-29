@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Tab1Page.vue')
       },
       {
-        path: 'mint',
+        path: 'myloop',
         component: () => import('@/views/Tab2Page.vue')
       },
       {

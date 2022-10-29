@@ -46,14 +46,8 @@ export default defineComponent({
     }
   },
   mounted() {
-const account = AccountCtrl.get()
- if (account.isConnected == true) {
-  console.log(account)
-  this.isConnected = true
-  this.walletAddress = account.address as string
-  console.log(this.walletAddress)
- }
-
+            document.getElementById('tab-button-myloop')!.style.display = "block"
+            document.getElementById('tab-button-add')!.style.display = "block"
   },
   methods: {
     async connectW() {

@@ -8,9 +8,9 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button id="tab2" tab="mint" href="/tabs/mint">
+        <ion-tab-button id="tab2" tab="myloop" href="/tabs/myloop">
           <ion-icon :icon="camera" />
-          <ion-label>Mint</ion-label>
+          <ion-label>My Story</ion-label>
         </ion-tab-button>
         
         <ion-tab-button id="tab3" tab="add" href="/tabs/add">

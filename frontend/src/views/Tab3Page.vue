@@ -19,7 +19,11 @@ import ExploreContainer from '@/components/ExploreContainer.vue';
 
 export default defineComponent({
   name: 'Tab3Page',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+  mounted() {
+                document.getElementById('tab-button-myloop')!.style.display = "block"
+            document.getElementById('tab-button-add')!.style.display = "block"
+  }
 });
 </script>
 
