@@ -16,7 +16,7 @@
     </ion-card-header>
     <ion-card-content>
      <!-- <ion-button fill="outline" id="cta" href="/tabs/mint">Create my LoopStory</ion-button> -->
-    <div id="notConnectedContainer" v-if="!isConnected" class="ion-justify-content-center">
+    <div id="notConnectedContainer" v-if="isConnected == false" class="ion-justify-content-center">
     <ion-button fill="outline" id="cta" v-on:click="connectW()">Connect wallet</ion-button>
     <w3m-modal></w3m-modal>
       </div> 
@@ -41,9 +41,9 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonGrid, IonCol, IonRow } from '@ionic/vue';
 import { ClientCtrl, ConfigCtrl, AccountCtrl, ModalCtrl, SignerCtrl, ContractCtrl, TransactionCtrl, ProviderCtrl, BlockCtrl, FeeCtrl } from '@web3modal/core'
 import { chains, providers } from '@web3modal/ethereum'
 import '@web3modal/ui'
@@ -54,7 +54,7 @@ import contractABI from '../../public/assets/ABI.json'
 let chainId = parseInt(process.env.VUE_APP_CHAIN_ID)
 
 ConfigCtrl.setConfig({
-  projectId: process.env.VUE_APP_WALLETCONNECT_KEY as string,
+  projectId: process.env.VUE_APP_WALLETCONNECT_KEY,
 })
 
 // Configure ethereum client
@@ -62,15 +62,15 @@ ClientCtrl.setEthereumClient({
   appName: 'MyLoopStory',
   autoConnect: true,
   chains: [chains.polygonMumbai],
-  providers: [providers.walletConnectProvider({ projectId: process.env.VUE_APP_WALLETCONNECT_KEY as string })]
+  providers: [providers.walletConnectProvider({ projectId: process.env.VUE_APP_WALLETCONNECT_KEY})]
 })
 
 export default  defineComponent({
   name: 'Tab1Page',
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, VideoPlayer },
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, VideoPlayer, IonButton, IonGrid, IonCol, IonRow },
   data() {
     return {
-      isConnected: new Boolean,
+      isConnected: false,
       isModalOpen: false,
       walletAddress: "",
       signer: {},
@@ -82,13 +82,12 @@ export default  defineComponent({
 
       AccountCtrl.watch(account => {
           if (account.isConnected == true) {
-            
+            console.log(account)
             this.isConnected = true
-            this.walletAddress = account.address as string
+            this.walletAddress = account.address
             this.checkOwned()
           }
           else {
-            console.log('not connected')
             this.isConnected = false
           }
       })
@@ -111,15 +110,15 @@ export default  defineComponent({
         functionName: "balanceOf",
         chainId: chainId,
         args: [this.walletAddress],
-        address: process.env.VUE_APP_CONTRACT_ADDRESS as string,
+        address: process.env.VUE_APP_CONTRACT_ADDRESS,
         abi: contractABI,
       }
-      let owned:any = await ContractCtrl.read(readConfig)
-      let ownedN:number = owned.toNumber() as any
+      let owned = await ContractCtrl.read(readConfig)
+      let ownedN = owned.toNumber()
       try {
-        if (ownedN as any > 0) {
-                    document.getElementById('tab-button-myloop')!.style.display = "block"
-                    document.getElementById('tab-button-add')!.style.display = "block"
+        if (ownedN > 0) {
+                    document.getElementById('tab-button-myloop').style.display = "block"
+                    document.getElementById('tab-button-add').style.display = "block"
               }
         } catch (error) {
           let errorMessage = "Failed to do something exceptional";
@@ -133,11 +132,11 @@ export default  defineComponent({
     async connectW() {
      ModalCtrl.subscribe(state => {
         if (state.open == true) {
-          document.getElementById('header')!.style.display = "none"
+          document.getElementById('header').style.display = "none"
           this.isModalOpen = true
         }
         else if (state.open == false) {
-          document.getElementById('header')!.style.display = "block"
+          document.getElementById('header').style.display = "block"
           this.isModalOpen = false
         }
       })
@@ -165,7 +164,7 @@ export default  defineComponent({
 
       const waitConfig = await {
         confirmations: 2,
-        hash: await write.hash,
+        hash: await write?.hash,
         chainId: chainId,
       }
       const transaction = await TransactionCtrl.wait(waitConfig)
