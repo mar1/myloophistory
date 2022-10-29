@@ -51,6 +51,8 @@ import VideoPlayer from '@/components/VideoPlayer.vue';
 import { ethers } from "ethers";
 import contractABI from '../../public/assets/ABI.json'
 
+let chainId = parseInt(process.env.VUE_APP_CHAIN_ID)
+
 ConfigCtrl.setConfig({
   projectId: process.env.VUE_APP_WALLETCONNECT_KEY as string,
 })
@@ -62,7 +64,6 @@ ClientCtrl.setEthereumClient({
   chains: [chains.polygonMumbai],
   providers: [providers.walletConnectProvider({ projectId: process.env.VUE_APP_WALLETCONNECT_KEY as string })]
 })
-
 
 export default  defineComponent({
   name: 'Tab1Page',
@@ -93,7 +94,7 @@ export default  defineComponent({
       })
 
     let signerOptions = {
-      chainId: 80001
+      chainId: chainId
     }
 
     SignerCtrl.watch(signer => {
@@ -108,9 +109,9 @@ export default  defineComponent({
     async checkOwned() {
         const readConfig = await {
         functionName: "balanceOf",
-        chainId: 80001,
+        chainId: chainId,
         args: [this.walletAddress],
-        address: "0xF7CC2849D4470D090abE5c81Cdb17d74956f7561",
+        address: process.env.VUE_APP_CONTRACT_ADDRESS as string,
         abi: contractABI,
       }
       let owned:any = await ContractCtrl.read(readConfig)
@@ -144,7 +145,7 @@ export default  defineComponent({
     },
 
     async mintLoop() {
-    const signer = await SignerCtrl.fetch({chainId: 80001})
+    const signer = await SignerCtrl.fetch({chainId: chainId})
 
       const callOverrides = {
         gasLimit: 500000,
@@ -152,11 +153,11 @@ export default  defineComponent({
       }
       const mintConfig = await {
         functionName: "mint",
-        chainId: 80001,
+        chainId: chainId,
         args: [this.walletAddress],
         signer: signer,
         overrides: callOverrides,
-        address: "0xF7CC2849D4470D090abE5c81Cdb17d74956f7561",
+        address: process.env.VUE_APP_CONTRACT_ADDRESS,
         abi: contractABI
       }
 
@@ -166,7 +167,7 @@ export default  defineComponent({
       const waitConfig = await {
         confirmations: 2,
         hash: await write.hash,
-        chainId: 80001,
+        chainId: chainId,
       }
       const transaction = await TransactionCtrl.wait(waitConfig)
       if (transaction.status == 1) {
