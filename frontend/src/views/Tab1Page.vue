@@ -162,7 +162,6 @@ export default  defineComponent({
       }
 
       const write = await ContractCtrl.write(mintConfig)
-      await console.log(write)
 
       const waitConfig = await {
         confirmations: 2,

@@ -20,12 +20,22 @@ import VideoRecord from '@/components/VideoRecord.vue';
 export default defineComponent({
   name: 'Tab3Page',
   components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, VideoRecord },
+    data() {
+    return {
+      isConnected: new Boolean,
+      isModalOpen: false,
+      walletAddress: "",
+      signer: {},
+      isOwner: new Boolean,
+    }
+  },
  mounted: async function() {
     let lMyLoop = document.getElementById('tab-button-myloop')
     lMyLoop!.style.display = "block"
       //document.getElementById('tab-button-myloop')!.style.display = "block"
       document.getElementById('tab-button-add')!.style.display = "block"
-  }
+
+  },
 });
 </script>
 
