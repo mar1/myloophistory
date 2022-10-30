@@ -20,7 +20,7 @@
     <ion-button fill="outline" class="cta" v-on:click="connectW()">Connect wallet</ion-button>
     <w3m-modal></w3m-modal>
       </div> 
-      <div id="connectedContainer" v-if="isConnected">
+      <div id="connectedContainer" v-if="isConnected == true">
             <ion-button fill="outline" class="cta" v-if="isConnected && !isOwner" v-on:click="mintLoop()">Mint my LoopStory</ion-button>
             <!--<ion-button fill="outline" class="cta" v-if="isConnected && isOwner" href="/tabs/add">Add a loop to my story</ion-button>-->
         </div>

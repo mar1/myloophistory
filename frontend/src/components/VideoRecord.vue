@@ -170,6 +170,7 @@
         abi: contractABI
         }
       let owned = await ContractCtrl.read(readConfig)
+      await console.log(owned)
       return await [owned[0].toNumber(), account.address]
     },
 
@@ -194,7 +195,7 @@
       const write = await ContractCtrl.write(pushConfig)
 
       const waitConfig = await {
-        confirmations: 2,
+        confirmations: 3,
         hash: await write?.hash,
         chainId: chainId,
       }
