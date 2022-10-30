@@ -148,7 +148,7 @@
       },
 
         download() {
-            this.player.record().saveAs({'video': 'my-video-file-name.webm'});
+            this.player.record().saveAs({'video': 'my-loop-story.webm'});
         },
     async upload(file) {
     document.getElementById('btn1').setAttribute('disabled', true);

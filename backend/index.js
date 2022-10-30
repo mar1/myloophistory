@@ -123,7 +123,7 @@ async function generateLoop(token) {
         console.log(tokenURL)
         const response = await fetch(tokenURL);
         const buffer = await response.buffer();
-        
+        //await fs.unlinkSync(`./videos/${owner}.mp4`);
          await fs.writeFile(`./videos/${owner}-${i+1}.webm`, buffer, () => 
            console.log(`Video ${i+1} downloaded`));  
            fArr.push(`file './videos/${owner}-${i+1}.webm'`)
@@ -137,6 +137,7 @@ async function generateLoop(token) {
             console.log(`wrote to ${pathName}`);
         });
        await writeStream.end();
+       await fs.unlinkSync(`./file.txt`);
        await exec(`ffmpeg -f concat -safe 0 -i file.txt -c copy ./videos/${owner}.mp4`);
        let finalHash = await storeToIPFS(`./videos/${owner}.mp4`)
        return await finalHash

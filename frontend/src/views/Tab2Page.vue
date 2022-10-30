@@ -6,10 +6,15 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-    <div id="notConnectedContainer" v-if="!isConnected" class="ion-justify-content-center">
-<ion-button fill="outline" class="cta" v-on:click="connectW()">Connect wallet</ion-button>
-<w3m-modal></w3m-modal>
-      </div>
+                <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-weight: bolder;">YOUR LOOPSTORY</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <MyLoopPlayer/>
+    </ion-card-content>
+    </ion-card>
+
     </ion-content>
   </ion-page>
 </template>
@@ -21,6 +26,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue
 import { ClientCtrl, ConfigCtrl, AccountCtrl, ModalCtrl, BlockCtrl, FeeCtrl } from '@web3modal/core'
 import { chains, providers } from '@web3modal/ethereum'
 import '@web3modal/ui'
+import MyLoopPlayer from '@/components/MyLoopPlayer.vue';
 
 
 
@@ -39,7 +45,7 @@ ClientCtrl.setEthereumClient({
 
 export default defineComponent({
   name: 'Tab2Page',
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, MyLoopPlayer },
   data() {
     return {
       isConnected: false,

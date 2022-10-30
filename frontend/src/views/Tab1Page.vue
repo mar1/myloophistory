@@ -79,6 +79,7 @@ export default  defineComponent({
     }
   },
     mounted: async function()  {
+      document.title = "MY LOOP STORY"
     const account = AccountCtrl.get()
 
       AccountCtrl.watch(account => {
