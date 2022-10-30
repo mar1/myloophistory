@@ -26,7 +26,7 @@ This project was realized in the context of ETHLisbon.
 
 **Client:** Vue.js, Ionic, Video.JS, Web3Modal v2
 
-**Server:** Node, Express
+**Server:** Node, Express, FFMPEG
 
 **Blockchain tool:** Ethers
 
