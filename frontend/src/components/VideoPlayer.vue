@@ -107,7 +107,7 @@
 
 .video-js {
  text-align: center;
- margin: 1rem auto;
+ margin: 2rem auto;
  border: 1px solid white;
  max-height: 460px;
  max-width: 74vw;

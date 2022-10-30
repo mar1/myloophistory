@@ -44,7 +44,7 @@
     font-weight: bolder;
   }
 
-  #cta {
+  .cta {
     --color: #15B7B9;
     --border-color: #15B7B9;
   }
@@ -54,6 +54,11 @@
     font-size: 16pt;
     color: #15B7B9;
     line-height: 2rem;
+  }
+
+  .disclaimer {
+    text-align: center;
+    line-height: 150%;
   }
 
   w3m-modal {
@@ -84,6 +89,10 @@
   .breath {
     -webkit-animation: breathing 1.5s ease-out infinite normal;
     animation: breathing 1.5s ease-out infinite normal;
+  }
+
+  #legend {
+    color: white;
   }
 
   @-webkit-keyframes breathing {

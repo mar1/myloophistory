@@ -15,14 +15,14 @@
       <ion-card-subtitle><b>Record you life as an NFT and enjoy forever your full ownership over it !</b></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-     <!-- <ion-button fill="outline" id="cta" href="/tabs/mint">Create my LoopStory</ion-button> -->
+     <!-- <ion-button fill="outline" class="cta" href="/tabs/mint">Create my LoopStory</ion-button> -->
     <div id="notConnectedContainer" v-if="isConnected == false" class="ion-justify-content-center">
-    <ion-button fill="outline" id="cta" v-on:click="connectW()">Connect wallet</ion-button>
+    <ion-button fill="outline" class="cta" v-on:click="connectW()">Connect wallet</ion-button>
     <w3m-modal></w3m-modal>
       </div> 
       <div id="connectedContainer" v-if="isConnected">
-            <ion-button fill="outline" id="cta" v-if="isConnected && !isOwner" v-on:click="mintLoop()">Mint my LoopStory</ion-button>
-            <!--<ion-button fill="outline" id="cta" v-if="isConnected && isOwner" href="/tabs/add">Add a loop to my story</ion-button>-->
+            <ion-button fill="outline" class="cta" v-if="isConnected && !isOwner" v-on:click="mintLoop()">Mint my LoopStory</ion-button>
+            <!--<ion-button fill="outline" class="cta" v-if="isConnected && isOwner" href="/tabs/add">Add a loop to my story</ion-button>-->
         </div>
     </ion-card-content>
     </ion-card>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonGrid, IonCol, IonRow } from '@ionic/vue';
 import { ClientCtrl, ConfigCtrl, AccountCtrl, ModalCtrl, SignerCtrl, ContractCtrl, TransactionCtrl, ProviderCtrl, BlockCtrl, FeeCtrl } from '@web3modal/core'

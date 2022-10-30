@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content>
     <div id="notConnectedContainer" v-if="!isConnected" class="ion-justify-content-center">
-<ion-button fill="outline" id="cta" v-on:click="connectW()">Connect wallet</ion-button>
+<ion-button fill="outline" class="cta" v-on:click="connectW()">Connect wallet</ion-button>
 <w3m-modal></w3m-modal>
       </div>
     </ion-content>
@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable */
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { ClientCtrl, ConfigCtrl, AccountCtrl, ModalCtrl, BlockCtrl, FeeCtrl } from '@web3modal/core'

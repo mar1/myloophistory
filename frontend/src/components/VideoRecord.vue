@@ -1,10 +1,25 @@
 <template>
-<div>
+<div id="recordContainer">
     <video id="myLoop" class="video-js vjs-default-skin" playsinline></video>
 <div id="postVideo">
+<ion-button fill="outline" class="cta" expand="block" id="open-modal">Validate this Loop</ion-button>
+    <ion-modal ref="modal" trigger="open-modal">
+  <ion-content class="ion-padding">
+    <div id="modalContainer">
+    <ion-button fill="outline" id="btn1" class="cta" expand="block" @click="upload(this.player.recordedData)">Upload to IPFS</ion-button>
+    <ion-button fill="outline" id="btn2" :disabled="true" class="cta" expand="block" @click="pushLoopToIPFS()">Sign Transaction</ion-button>
+    <p style="text-align: center">Or</p>
+    <ion-button fill="outline" @click="download()" class="cta" expand="block">Download this video</ion-button>
+    </div>
+      <ion-button @click="cancel()" expand="block" color="danger">Cancel</ion-button>
+  </ion-content>
+    </ion-modal>
+
+<!--
 <p class="option"><a @click="download()" id="dl" target="_blank">1) DOWNLOAD</a></p>
 <p class="option"><a @click="upload(this.player.recordedData)" id="dl" target="_blank">2) UPLOAD</a></p>
 <p class="option"><a @click="pushLoopToIPFS()" id="sign" target="_blank">3) SIGN TXN</a></p>
+-->
 </div>
 </div>
 </template>
@@ -24,9 +39,17 @@
     import '@web3modal/ui'
     import { ethers } from "ethers";
     import contractABI from '../../public/assets/ABI.json'
+    import { OverlayEventDetail } from '@ionic/core/components';
+    import { modalController } from "@ionic/vue";
+    import { defineComponent } from 'vue';
+    import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonModal } from '@ionic/vue';
+
+
     let chainId = parseInt(process.env.VUE_APP_CHAIN_ID)
     var front = false;
-    export default {
+    export default defineComponent({
+  name: 'VideoRecord',
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonModal },
         data() {
             return {
                 player: '',
@@ -102,7 +125,7 @@
             this.player.on('finishRecord', () => {
                 console.log('finished recording: ', this.player.recordedData);
                let lPostVideo = window.document.getElementById('postVideo')
-               lPostVideo.style.display = "inline-flex"
+               lPostVideo.style.display = "flex"
                this.player.exitFullscreen();
             });
 
@@ -118,9 +141,14 @@
             if (this.player) {
                 this.player.dispose();
             }
+    
         },
 
     methods: {
+              cancel() {
+        this.$refs.modal.$el.dismiss(null, 'cancel');
+      },
+
         download() {
             this.player.record().saveAs({'video': 'my-video-file-name.webm'});
         },
@@ -170,17 +198,24 @@
 
 
     }
-    }
+    })
 </script>
 
 <style>
 #myLoop {
-      margin-top: 10vh;
+  margin-top: 2vh;
+}
+
+#recordContainer {
+    padding-bottom: 2rem;
 }
 
 #postVideo {
   display: none;
-  margin-top: 2rem;
+  text-align: center;
+  margin: 2rem auto 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .option {
@@ -208,5 +243,16 @@ border: 1px solid white;
 .vjs-icon-video-perm::before {
   content: "∞" !important;
   padding-bottom: 50px !important;
+  color: #15B7B9;
+  font-weight: bolder;
 }
+
+#modalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+}
+
 </style>
