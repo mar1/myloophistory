@@ -6,9 +6,8 @@
     <ion-modal ref="modal" trigger="open-modal">
   <ion-content class="ion-padding">
     <div id="modalContainer">
-    <ion-button fill="outline" id="btn1" class="cta" expand="block" @click="upload(this.player.recordedData)">Upload to IPFS</ion-button>
-    <ion-button fill="outline" id="btn2" :disabled="true" class="cta" expand="block" @click="pushLoopToIPFS()">Sign Transaction</ion-button>
-    <p style="text-align: center">Or</p>
+    <ion-button fill="outline" id="btn1" class="cta" expand="block" @click="upload(this.player.recordedData)">Upload to IPFS forever</ion-button>
+    <p style="text-align: center">OR</p>
     <ion-button fill="outline" @click="download()" class="cta" expand="block">Download this video</ion-button>
     </div>
       <ion-button @click="cancel()" expand="block" color="danger">Cancel</ion-button>
@@ -86,7 +85,6 @@
             
             this.isConnected = true
             this.walletAddress = account.address
-            console.log(this.walletAddress)
             this.checkOwned()
           }
           else {
@@ -153,12 +151,12 @@
             this.player.record().saveAs({'video': 'my-video-file-name.webm'});
         },
     async upload(file) {
+    document.getElementById('btn1').setAttribute('disabled', true);
     const client = new NFTStorage({ token: process.env.VUE_APP_NFT_STORAGE_KEY })
-    //let videoFile = fs.readFileSync(file);
-    //const videoFile = new File([ someBinaryImageData ], file, { type: 'video/mp4' })
     const metadata = await client.storeBlob(file)
     this.loopToPush = metadata
-    await alert('upload completed')
+    await alert('Upload completed, please validate the transaction')
+    await this.pushLoopToIPFS()
     },
 
     async findTokenId() {
@@ -254,5 +252,6 @@ border: 1px solid white;
     flex-direction: column;
     height: 80vh;
 }
+
 
 </style>
