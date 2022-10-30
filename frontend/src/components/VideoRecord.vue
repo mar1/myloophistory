@@ -192,6 +192,21 @@
       }
 
       const write = await ContractCtrl.write(pushConfig)
+
+      const waitConfig = await {
+        confirmations: 2,
+        hash: await write?.hash,
+        chainId: chainId,
+      }
+      const transaction = await TransactionCtrl.wait(waitConfig)
+      if (transaction.status == 1) {
+        alert('Loop successfully added')
+        window.location.reload()
+      }
+      else {
+        alert('There was a problem during the process')
+        document.getElementById('btn1').setAttribute('disabled', false);
+      }
     },
 
 
