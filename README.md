@@ -1,5 +1,5 @@
 
-![Logo]([http://localhost:3000](https://polkarbon.herokuapp.com/)/logogreen.png)
+![Logo](https://polkarbon.herokuapp.com/logogreen.png)
 
 
 # Polkarbon
