@@ -4,10 +4,9 @@
 
 # Polkarbon
 
-MyLoopStory is a cross-chain carbon offsetter made for Polkadot Global hackaton
-
 Polkarbon is an experimental project made for Polkadot Global Hackaton, Europe Series.
 The goal is to connect technologies from EVM chains, Polkadot and Moonbeam specificities while keeping an ethical perspective by using Toucan Protocol.
+It has 2 main functions : one for immediate carbon offsetting from any chain and another function for long-term impact based on pKarb token.
 
 
 ## Features
