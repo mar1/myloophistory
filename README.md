@@ -1,7 +1,6 @@
 
 ![Logo](https://polkarbon.herokuapp.com/logogreen.png)
 
-
 # Polkarbon
 
 Polkarbon is an experimental project made for Polkadot Global Hackaton, Europe Series.
@@ -17,7 +16,7 @@ It has 2 main functions : one for immediate carbon offsetting from any chain and
 - Ability to send the yield in a cross-chain swap to the Polygon receiver
 - Ability to perform swap from allowed ERC20 tokens on Stellaswap for GLMR before minting pKarb 
 - Handle xc20 tokens with sufficient liquidities
-- Handle 4 different wallets
+- Handle 4 different wallet providers
 
 
 ## Tech Stack
